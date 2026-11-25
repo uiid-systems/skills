@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/uiid-systems/skills/compare/v0.2.0...v0.2.1) (2026-11-25)
+
+
+### Features
+
+* **uiid:** let triage-findings read any posted review and the repo's tests ([40bdd38](https://github.com/uiid-systems/skills/commit/40bdd384cbda688e0a341ced5ff79a1b6381c54d))
+
 ## [0.2.0](https://github.com/uiid-systems/skills/compare/v0.1.0...v0.2.0) (2026-11-25)
 
 
