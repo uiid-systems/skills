@@ -53,7 +53,7 @@ If the review of round 4 still has an open Critical or Important finding, stop a
 - Fix a false statement by correcting or removing it, not by explaining around it.
 - Make the fixes yourself. You already hold the finding and the check you did, and a fresh agent tends to fix more than was asked. Hand a fix to another agent only when a Critical or Important finding needs work across several parts of the repo, and give that agent this section.
 - One commit per round, named for the round, with a body of one short line per finding fixed. Follow the repo's commit rules.
-- Run what the change calls for before you push. The commit hooks cover format and lint where the repo has them. Changed code also needs the repo's tests: run the test commands the repo's `AGENTS.md` or `CLAUDE.md` names, scoped to what changed when they say how. If neither names any, ask the owner once which to run and use the answer for the rest of the session; as a subagent, run none and say so in the report. Never guess a test command.
+- Run what the change calls for before you push. The commit hooks cover format and lint where the repo has them. Changed code also needs the repo's tests. When the repo has a `.claude/uiid.yml` profile, run its `checks`, counting an entry with a `when` list only when the change touches a path it names (the plugin's README describes the profile). Without a profile, run the test commands the repo's `AGENTS.md` or `CLAUDE.md` names, scoped to what changed when they say how. If there is no profile and neither names any, ask the owner once which to run and use the answer for the rest of the session; as a subagent, run none and say so in the report. Never guess a test command.
 
 ## The report
 

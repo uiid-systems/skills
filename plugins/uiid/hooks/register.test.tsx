@@ -185,6 +185,30 @@ test("a change touches one ticket and keeps the rest", () => {
   ).toBe("merged");
 });
 
+test("a build-linear-project run opens the pane and other skills do not", async ($, on) => {
+  const opened: string[] = [];
+  on("ui.open", (_, e) => {
+    opened.push(e.id);
+
+    return { value: { isPlaced: true } };
+  });
+  on("skill.prompt", (_, e) => ({ text: e.text }));
+
+  await $.skill.prompt({
+    skill: "uiid:graph-linear-project",
+    text: "Show it.",
+    frontmatter: {},
+  });
+  expect(opened).toEqual([]);
+
+  await $.skill.prompt({
+    skill: "uiid:build-linear-project",
+    text: "Build it.",
+    frontmatter: {},
+  });
+  expect(opened).toEqual(["project-graph"]);
+});
+
 test("the pane draws what set_graph sent, then follows set_status", async ($, on) => {
   on("tool.register", () => ({ value: { tool: "mcp__uiid__set_graph" } }));
   let isPlaced = true;
@@ -223,7 +247,7 @@ test("the pane draws what set_graph sent, then follows set_status", async ($, on
   await $.session.start({ cwd: "/", surface: "terminal", isInteractive: true });
 
   await $.skill.prompt({
-    skill: "uiid:build-project",
+    skill: "uiid:build-linear-project",
     text: "Build it.",
     frontmatter: {},
   });

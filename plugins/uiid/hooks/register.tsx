@@ -155,7 +155,7 @@ export const register: Register = (on) => {
   // A build run opens the pane as it starts, before the project is read. A
   // failure here must never cost the skill its prompt.
   on("skill.prompt", async ($, e, next) => {
-    if (e.skill.split(":").pop() === "build-project") {
+    if (e.skill.split(":").pop() === "build-linear-project") {
       void $.ui.open({ id: PANE, title: PANE_TITLE });
     }
 
