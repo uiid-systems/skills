@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "uiid-skills",
+  "description": "UIID's Claude Code plugins: Linear project and pull request review skills that work in any repo.",
+  "owner": {
+    "name": "UIID",
+    "url": "https://github.com/uiid-systems"
+  },
+  "plugins": [
+    {
+      "name": "uiid",
+      "source": "./plugins/uiid",
+      "description": "Graph and build a Linear project's tickets, and review and triage pull requests.",
+      "homepage": "https://github.com/uiid-systems/skills",
+      "license": "MIT"
+    }
+  ]
+}
