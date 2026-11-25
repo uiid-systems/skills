@@ -10,7 +10,13 @@ Claude Code plugins for working with Linear projects and pull requests. They sta
 
 ## Install
 
-TODO: the plugin is not in this repo yet. Install steps land with the plugin move, and pinning a version lands with the first release.
+In Claude Code:
+
+```
+/plugin install uiid --marketplace uiid-systems/skills
+```
+
+Pinning a version lands with the first release.
 
 ## Requirements
 
