@@ -10,7 +10,7 @@
     {
       "name": "uiid",
       "source": "./plugins/uiid",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "description": "Graph and build a Linear project's tickets, and review and triage pull requests.",
       "homepage": "https://github.com/uiid-systems/skills",
       "license": "MIT"
