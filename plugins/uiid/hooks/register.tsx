@@ -42,7 +42,7 @@ const graph = atom({ plugin: "uiid", key: "graph" } as const, EMPTY, {
 const TICKET_SCHEMA = {
   type: "object",
   properties: {
-    id: { type: "string", description: "Ticket id, such as UI-436" },
+    id: { type: "string", description: "Ticket id, such as ENG-123" },
     status: {
       type: "string",
       enum: STATUS_WORDS,
@@ -69,7 +69,7 @@ export const register: Register = (on) => {
     await $.tool.register({
       name: "set_graph",
       description:
-        "Draws a Linear project's tickets as a dependency diagram in the project graph pane, replacing the one shown. Give the sections top to bottom and the tickets in each in the order to draw them, every ticket after the tickets it waits on. The pane draws the connectors, links and colours itself. Follow the uiid:graph-project skill for what goes in.",
+        "Draws a Linear project's tickets as a dependency diagram in the project graph pane, replacing the one shown. Give the sections top to bottom and the tickets in each in the order to draw them, every ticket after the tickets it waits on. The pane draws the connectors, links and colours itself. Follow the uiid:graph-linear-project skill for what goes in.",
       inputSchema: {
         type: "object",
         properties: {
@@ -114,7 +114,7 @@ export const register: Register = (on) => {
       inputSchema: {
         type: "object",
         properties: {
-          ticket: { type: "string", description: "Ticket id, such as UI-436" },
+          ticket: { type: "string", description: "Ticket id, such as ENG-123" },
           status: { type: "string", enum: [...STATUS_WORDS, "waiting"] },
           pr: { type: "integer", description: "Its pull request's number" },
           note: {
@@ -243,7 +243,7 @@ export const register: Register = (on) => {
     if (shown.sections.length === 0) {
       return (
         <Box flexDirection="column">
-          <Text dimColor>No project yet. Run /uiid:graph-project.</Text>
+          <Text dimColor>No project yet. Run /uiid:graph-linear-project.</Text>
         </Box>
       );
     }
