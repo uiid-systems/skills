@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0](https://github.com/uiid-systems/skills/compare/v0.2.1...v0.3.0) (2026-11-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* **uiid:** invoke /uiid:build-linear-project instead of /uiid:build-project, and add a .claude/uiid.yml profile to the repo first.
+
+### Features
+
+* **uiid:** draft a profile for a repo that has none before building ([b08a4d5](https://github.com/uiid-systems/skills/commit/b08a4d58c2982e08a11dbe0d825bae96a43a8611))
+* **uiid:** draft a profile for a repo that has none before building ([fa0ad82](https://github.com/uiid-systems/skills/commit/fa0ad8286c17fa0ff8eeaa7d7f3a2ec937651690))
+* **uiid:** rename build-project to build-linear-project and read repo rules from a profile ([40bed6b](https://github.com/uiid-systems/skills/commit/40bed6b72eeb7fa232c47c63ae9cc15b090d3793))
+
+
+### Bug Fixes
+
+* **uiid:** describe the plugin without naming one repo ([3c82379](https://github.com/uiid-systems/skills/commit/3c8237935ad315e3751be58dc8061d8308234607))
+
 ## [0.2.1](https://github.com/uiid-systems/skills/compare/v0.2.0...v0.2.1) (2026-11-25)
 
 
