@@ -8,7 +8,7 @@ argument-hint: "[project or ticket ids]"
 
 You are the orchestrator. You pick the tickets, start one build agent per ticket, run a review loop on each until its reviewers approve, and then push the approved commit and open a draft PR yourself. You write no product code. The owner hears from you at three points: before any agent starts (one set of questions per ticket that needs a decision, then which tickets you picked and why), each PR as it opens or ticket as it is held or stopped, and a closing summary that also carries every ticket that was stopped, held or left waiting.
 
-The argument is a Linear project (name or `P-UI-n`) or a list of ticket ids. With no argument, ask which project.
+The argument is a Linear project (name or id, such as `P-ENG-4`) or a list of ticket ids. With no argument, ask which project.
 
 ## What this does and does not protect
 
@@ -43,7 +43,7 @@ If the answers settle the criteria, the ticket is ready. Paste the questions and
 
 If the criteria are still unclear after that one round, do not ask again. Add the clarifying material to the ticket (the questions, the answers so far, and what is still open) with `save_comment`, and leave the ticket for another run. An undecided product direction, a milestone gate, or a question you cannot write options for is not a question to ask here; leave those tickets out from the start.
 
-Show the owner the project as `uiid:graph-project` lays it out, with its headings for a run: the picked tickets under `Running now`, the stacked ones under `Stacks in this run`, and the rest that no gate holds under `Not this run`. Under it say, in one line each, why the tickets not picked were left or deferred. Then start. Do not wait for approval of the list unless nothing qualified or the pick is surprising.
+Show the owner the project as `uiid:graph-linear-project` lays it out, with its headings for a run: the picked tickets under `Running now`, the stacked ones under `Stacks in this run`, and the rest that no gate holds under `Not this run`. Under it say, in one line each, why the tickets not picked were left or deferred. Then start. Do not wait for approval of the list unless nothing qualified or the pick is surprising.
 
 When nothing is ready, say so and show the same list, which names the ticket everything hangs off and the gates that need the owner. Do not loosen the rules above to find work.
 
@@ -111,7 +111,7 @@ What the allowlist is for: workflow files, build config, scripts and dependencie
 Otherwise, ask the build agent for the PR title and body, and check them against these rules:
 
 - The title is a conventional commit in imperative mood; it becomes the changelog entry. Breaking changes carry `!`. Check the scope against `commitlint.config.js` on every PR, since CI never checks it. On a stacked PR, also check the type against `.github/workflows/pr-title.yml`, since CI only checks titles of PRs into `main`.
-- The body is bullets: what changed, how it was verified with real numbers, what was deferred, and a checklist where each box can be confirmed from the diff or a command. Link the ticket (`Closes UI-425`).
+- The body is bullets: what changed, how it was verified with real numbers, what was deferred, and a checklist where each box can be confirmed from the diff or a command. Link the ticket (`Closes ENG-123`).
 - No AI attribution, no hard-wrapped prose, no `preview` label.
 
 Then, in this order:
@@ -124,6 +124,6 @@ Then, in this order:
 
 ## 6. Tell the owner
 
-As each PR opens, give the owner one line: the ticket, the PR link, the number of review rounds and anything deferred. Under it print the `uiid:graph-project` list again with a new updated time, and do the same when a ticket is held or stopped. Those are the only moments the list prints again before the closing summary: a ticket moving to In Progress as its agent starts prints nothing. When all tickets are finished, stopped or held, close with a short table of ticket, PR, rounds and open points, where a failing check on a draft PR (`gh pr checks <number>`) is an open point. Include every stopped or held ticket with its reason, and every waiting ticket whose blocker never reached In Review. Under the table show the `uiid:graph-project` list again as the project now stands, with each ticket's status and pull request, so the owner sees what the run moved and what still waits. Then offer to open the PRs in the browser and to post the review findings to each PR.
+As each PR opens, give the owner one line: the ticket, the PR link, the number of review rounds and anything deferred. Under it print the `uiid:graph-linear-project` list again with a new updated time, and do the same when a ticket is held or stopped. Those are the only moments the list prints again before the closing summary: a ticket moving to In Progress as its agent starts prints nothing. When all tickets are finished, stopped or held, close with a short table of ticket, PR, rounds and open points, where a failing check on a draft PR (`gh pr checks <number>`) is an open point. Include every stopped or held ticket with its reason, and every waiting ticket whose blocker never reached In Review. Under the table show the `uiid:graph-linear-project` list again as the project now stands, with each ticket's status and pull request, so the owner sees what the run moved and what still waits. Then offer to open the PRs in the browser and to post the review findings to each PR.
 
 Leave the worktrees in place. The owner may want to keep working in them, and removing one is not yours to decide.

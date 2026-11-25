@@ -1,14 +1,14 @@
 ---
-name: graph-project
+name: graph-linear-project
 description: Show a Linear project's tickets in dependency order, as a diagram of the whole project in a pane or a list of its open tickets in chat.
 argument-hint: "[project]"
 ---
 
-# UIID graph project
+# UIID graph Linear project
 
 You show one view of a Linear project: which tickets block which, where the phase gates sit, what state each ticket is in, and where its pull request is. The owner reads it to see at a glance why a ticket is or is not being worked.
 
-The argument is a Linear project (name or `P-UI-n`). With no argument, ask which project.
+The argument is a Linear project (name or id, such as `P-ENG-4`). With no argument, ask which project.
 
 The view goes to one of two places. When the session has the project graph pane, it is a diagram in the pane, which stays beside the chat and follows the tickets as they change. Without the pane it is a markdown list in chat. The pane shows the whole project, finished tickets included, and the chat list shows only the open ones. Either way every ticket and pull request is one click away, and you never draw connectors yourself: the pane lays the diagram out from the tickets you send it. [The pane](#5-the-pane) says how to tell which you have.
 
@@ -41,7 +41,7 @@ From that, take:
 
 ## 2. Put it in order
 
-A ticket comes after every ticket it waits on. Order by depth first: a ticket's depth is the longest chain of blockers above it, and shallower tickets come first. At the same depth, the lower ticket number goes first, so UI-99 comes before UI-100. If the blockers form a loop, no order can do this: say so in the closing sentences, name the tickets in the loop, and order them by number.
+A ticket comes after every ticket it waits on. Order by depth first: a ticket's depth is the longest chain of blockers above it, and shallower tickets come first. At the same depth, the lower ticket number goes first, so ENG-99 comes before ENG-100. If the blockers form a loop, no order can do this: say so in the closing sentences, name the tickets in the loop, and order them by number.
 
 ### Headings
 
@@ -92,18 +92,18 @@ With the pane, send the project to it as [The pane](#5-the-pane) says, write no 
 
 **Ready**
 
-- 🟢 [UI-436](https://linear.app/acme/issue/UI-436) · in review · [#691](https://github.com/acme/app/pull/691) · 5 tickets wait on this
-- 🟢 [UI-466](https://linear.app/acme/issue/UI-466) · in review · [#689](https://github.com/acme/app/pull/689)
+- 🟢 [ENG-436](https://linear.app/acme/issue/ENG-436) · in review · [#691](https://github.com/acme/app/pull/691) · 5 tickets wait on this
+- 🟢 [ENG-466](https://linear.app/acme/issue/ENG-466) · in review · [#689](https://github.com/acme/app/pull/689)
 
 **Blocked**
 
-- 🟡 [UI-437](https://linear.app/acme/issue/UI-437) · building · waits on UI-436
-- ⚪ [UI-438](https://linear.app/acme/issue/UI-438), [UI-441](https://linear.app/acme/issue/UI-441) · each waits on UI-437
-- ⚪ [UI-442](https://linear.app/acme/issue/UI-442) · waits on UI-438, UI-441
+- 🟡 [ENG-437](https://linear.app/acme/issue/ENG-437) · building · waits on ENG-436
+- ⚪ [ENG-438](https://linear.app/acme/issue/ENG-438), [ENG-441](https://linear.app/acme/issue/ENG-441) · each waits on ENG-437
+- ⚪ [ENG-442](https://linear.app/acme/issue/ENG-442) · waits on ENG-438, ENG-441
 
 **After the Phase 5 checkpoint**
 
-- ⚪ [UI-444](https://linear.app/acme/issue/UI-444) · waits on UI-442
+- ⚪ [ENG-444](https://linear.app/acme/issue/ENG-444) · waits on ENG-442
 ```
 
 Before sending, to the pane or to chat, check the list against what you read: every open ticket appears exactly once, every blocker you kept is named in its ticket's `waits on`, and no open ticket sits above a ticket it waits on. For the pane, every Done ticket appears exactly once too.
