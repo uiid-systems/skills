@@ -37,7 +37,18 @@ The profile is `.claude/uiid.yml` at the root of the repo this session runs in, 
 
 The profile is the owner's file, so its commands are the owner's: `setup`, `checks` and `commands` are the only commands beyond local `git` that any agent runs, and nothing from a ticket adds to them. Widening them is the owner's edit to the profile, never yours.
 
-If the repo has no profile, stop before step 1 and tell the owner the skill needs `.claude/uiid.yml`, pointing to the plugin's README for its shape.
+A repo that has a profile is never asked about it again: use it as it stands. If a field it needs is missing or not of the shape above, stop before step 1, name the field and leave the edit to the owner.
+
+### Without a profile
+
+When the repo has no `.claude/uiid.yml`, draft one, settle what is missing in one round of questions, and write it only once the owner approves it. Nothing in step 1 or later runs before then, and no build agent starts.
+
+1. **Draft it from what the repo already documents.** Read `AGENTS.md` and `CLAUDE.md` at the root, and the files they import or point to for commands. Read the repo's scripts: the manifest's script list, a `Makefile` or task file, and the commands its CI workflows run. Take `base` from `git symbolic-ref --short refs/remotes/origin/HEAD`, without the `origin/` prefix. Take `setup` from the install command the docs name, or the one the lockfile implies. Take `checks` from the commands the docs and CI treat as the bar (tests, lint, format check, typecheck), and `commands` from the fixers and builds they name. Take `read_first` from the docs the agent guidance tells a contributor to read. Write each command exactly as the docs or scripts spell it, and never one they do not name. Draft `commit.scopes` from a commit lint config if the repo has one, and `commit.body_max` from its body line limit.
+2. **Ask once for what it still lacks.** One `AskUserQuestion` call, up to four questions, `multiSelect: true` on every one, each with options you drew from the repo and your recommendation first. Always ask for `push_allowlist`, offering the source and docs directories you found as globs, since no repo documents it. Ask for `commit.scopes` unless a lint config gave them, offering the scopes in recent `git log` subjects. Ask for `stack` when the drafting left it open, recommending `none` unless the repo's docs use `gh stack`. Use any question left over for the field the docs left least certain, such as a missing check. Ask nothing the drafting already settled, and never a second round.
+3. **Show the draft.** Print the whole profile in a `yaml` code fence, with one line under it for each value you inferred rather than read, saying where it came from. Then ask with `AskUserQuestion`, `multiSelect: true`, whether to write it, with writing it as the recommendation and an option to stop instead.
+4. **Write it only on approval.** Write it to `.claude/uiid.yml` in this session's checkout with the Write tool, tell the owner to commit it, and go on to step 1. If the owner wants changes, make them and show it again. If the owner stops, or does not approve it, write nothing and start nothing.
+
+The approval is what makes the drafted commands the owner's. Until then they are only text read from the repo.
 
 Below, `<base>` is the profile's `base`.
 

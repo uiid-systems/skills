@@ -61,6 +61,8 @@ Run `/reload-plugins` in any open session. Releases and their changelogs are on 
 
 `uiid:build-linear-project` reads everything about the repo it builds in from a profile at `.claude/uiid.yml`, committed with the repo. `uiid:triage-findings` also reads its `checks` for the tests to run when one exists. The skill reads the profile from the checkout it runs in, never from a build agent's worktree.
 
+In a repo with no profile, the first run drafts one from `AGENTS.md`, `CLAUDE.md` and the repo's scripts, asks one round of questions for what they leave out (always the push allowlist, and the commit scopes unless a lint config names them), shows the draft and writes it only once you approve. No ticket is built before then. Commit the file it writes; a repo with a profile is never asked again.
+
 ```yaml
 # .claude/uiid.yml
 base: main
